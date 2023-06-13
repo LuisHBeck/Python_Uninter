@@ -1,9 +1,9 @@
 def verificar_desconto(qnt):
-    if (qnt < 200):
+    if qnt < 200:
         return 0
-    elif (qnt >= 200  or qnt < 1000):
+    elif qnt >= 200  or qnt < 1000:
         return 0.05
-    elif (qnt >= 1000 or qnt < 200):
+    elif qnt >= 1000 or qnt < 200:
         return 0.1
     else:
         return 0.15
@@ -40,7 +40,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-

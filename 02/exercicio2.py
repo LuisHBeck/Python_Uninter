@@ -67,7 +67,7 @@ def verificar_numero_bolas():
     while 1 > numero or numero > 3:
         try:
             numero = int(input('Entre com o número de bolas de sorvete desejado (1/2/3)>> '))
-            if (1 > numero or numero > 3):
+            if 1 > numero or numero > 3:
                 print('Número de bolas de sorvete inválido. Tente novamente')
         except:
             print('Número de bolas de sorvete inválido. Tente novamente')

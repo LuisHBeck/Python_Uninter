@@ -1,5 +1,3 @@
-import inquirer
-
 def boas_vindas():
     print(f'Bem-vindo a loja do Luís Beck!')
 

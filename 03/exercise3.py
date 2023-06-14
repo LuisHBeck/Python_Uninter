@@ -4,6 +4,9 @@ def boas_vindas():
     print(f'Bem-vindo a loja do Luís Beck!')
 
 
+adicional = []
+
+
 def base_peso(peso):
     if peso < 3:
         return 40
@@ -24,15 +27,24 @@ def multiplicador_pelo(pelo):
         return 2
     
 
-def valor_extra(extra):
-    if extra == 1:
+def valor_extra(servico):
+    if servico == 1:
         return 10
-    elif extra == 2:
+    elif servico == 2:
         return 12
-    elif extra == 3:
+    elif servico == 3:
         return 15
     else:
         return 0
+    
+
+def calculo_extra():
+    valor_final = 0
+    for valor in adicional:
+        valor_final += valor
+
+    return valor_final
+
 
 def cachorro_peso():
     peso = 0
@@ -40,7 +52,7 @@ def cachorro_peso():
         try:
             peso = float(input('Entre com o peso do cachorro>> '))
             if (1 > peso or peso >= 50):
-                print('Peso inválido! Tente novamente')
+                print('Não aceitamos cachorros tão grandes')
         except(ValueError):
             print('Você digitou um valor não numérico. Tente novamente')
     
@@ -51,9 +63,10 @@ def cachorro_peso():
 def cachorro_pelo():
     pelo = " "
     while pelo not in 'cml':
-        print('''c - Pelo Curto
-                 m - Pelo Médio
-                 l - Pelo Longo''')
+        print('''Entre com o pelo do cachorro
+        c - Pelo Curto
+        m - Pelo Médio
+        l - Pelo Longo''')
         pelo = str(input('>> ')).strip().lower()
         if (pelo not in 'cml'):
             print('Pelo inválido. Tente novamente.')
@@ -62,35 +75,47 @@ def cachorro_pelo():
     return multiplicador
 
 
+def opcoes_adicionais():
+    print('''Deseja adicionar mais algum serviço?
+    1 - Corte de Unhas - R$10,00
+    2 - Escovar Dentes - R$12,00
+    3 - Limpeza de Orelhas - R$15,00
+    0 - Não desejo mais nada''')
+
 def cachorro_extra():
-    extra = 0
-    while 0 > extra or extra > 3:
-        try:
-            print('''1 - Corte de Unhas - R$10,00
-                     2 - Escovar Dentes - R$12,00
-                     3 - Limpeza de Orelhas - R$15,00
-                     0 - Não desejo mais nada''')
-            extra = int(input('>> '))
-            if (0 > extra or extra > 3):
-                print('Opção inválida! Tente novamente')
-        except(ValueError):
-            print('Você digitou um valor não numérico. Tente novamente')
+    while True:
+        opcoes_adicionais()
+        extra = int(input('>> '))
 
-    vlr_extra = valor_extra(extra)
-    return vlr_extra
+        while extra < 0 or extra > 3:
+            try:
+                opcoes_adicionais()
+                extra = int(input('>> '))
+                if extra < 0 or extra > 3:
+                    print('Opção inválida! Tente novamente')
+            except(ValueError):
+                print('Você digitou um valor não numérico. Tente novamente')
 
-
-def verificar_adicional():
-    questions = [
-        inquirer.List('adicional',
-                        message="Deseja adicionar mais algum serviço?",
-                        choices=['Corte de Unhas - R$10,00',
-                                'Escovar Dentes - R$12,00',
-                                'Limpeza de Orelhas - R$15,00',
-                                'Não desejo mais nada'])
-        ]
-    answers = inquirer.prompt(questions)
-    return answers['pelo']
+        if extra == 0:
+            valor_total = calculo_extra()
+            return valor_total
+        
+        extra_valor = valor_extra(extra)
+        adicional.append(extra_valor)
 
 
-cachorro_peso()
+def calculo(base, multiplicador, extra):
+    return base * multiplicador + extra
+
+
+def main():
+    boas_vindas()
+    base = cachorro_peso()
+    multiplicador = cachorro_pelo()
+    extra = cachorro_extra()
+    
+    print(F'Total a pagar(R$): {calculo(base, multiplicador, extra):.{2}f} (peso: {base}) * pelo: {multiplicador} + adicional(is): {extra}')
+
+
+if __name__ == '__main__':
+    main()

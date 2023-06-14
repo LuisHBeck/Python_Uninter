@@ -97,4 +97,4 @@ if __name__ == '__main__':
     tabela_cardapio()
     main()
     final = valor_final()
-    print(f'O valor total a ser pago: R${final}')
+    print(f'O valor total a ser pago: R${final:.2f}')

@@ -1,19 +1,21 @@
+# biblioteca para formatação de tabelas
 from prettytable import PrettyTable
 
 valores = []
 
+#formatando a tabela com prettytable (lib)
 def tabela_cardapio():
     table = PrettyTable()
     table.field_names = ['N° DE BOLAS', 'Sabor Tradicional (tr)',
                         'Sabor Premium (pr)', 'Sabor especial (es)']
-    
+
     table.add_row([1, 'R$ 6,00', 'R$ 7,00', 'R$ 8,00'])
     table.add_row([2, 'R$10,00', 'R$12,00', 'R$14,00'])
     table.add_row([3, 'R$14,00', 'R$17,00', 'R$20,00'])
 
     print(table)
 
-
+# verificando o input de numero de bolas e o sabor e retornando o valor
 def valor_sorvete(numero, sabor):
     if numero == 1:
         if sabor == 'tr':
@@ -36,22 +38,21 @@ def valor_sorvete(numero, sabor):
             return 17
         else:
             return 20
-        
 
+# função para guardar os valores unitários
 def valor_pedido_unitario(sabor, numero):
     preco = valor_sorvete(numero, sabor)
     valores.append(preco)
 
-
+# função para calcular o valor final do pedido
 def valor_final():
     preco_final = 0
     for preco in valores:
         preco_final += preco
 
     return preco_final
-    
 
-        
+# função para garantir o input correto dos sabores disponiveis
 def verificar_sabores():
     sabor = " "
     while sabor not in 'trpres':
@@ -61,7 +62,7 @@ def verificar_sabores():
 
     return sabor
 
-
+# função para garantir o input correto dos numero de bolas disponiveis
 def verificar_numero_bolas():
     numero = 0
     while 1 > numero or numero > 3:
@@ -74,7 +75,7 @@ def verificar_numero_bolas():
 
     return numero
 
-
+# função para veririficar se terá um novo pedido
 def verificar_continuidade():
     continuar = " "
     while continuar not in 'sn':
@@ -84,7 +85,7 @@ def verificar_continuidade():
         else:
             main()
 
-
+# função principal para chamar todas em sequencia
 def main():
     sabor = verificar_sabores()
     numero = verificar_numero_bolas()
@@ -92,8 +93,9 @@ def main():
     verificar_continuidade()
     valor_final()
 
-
+# boa pratica para execução do programa 
 if __name__ == '__main__':
+    print('Bem-vindo a Sorveteria do Luís Beck')
     tabela_cardapio()
     main()
     final = valor_final()

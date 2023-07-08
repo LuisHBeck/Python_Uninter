@@ -1,3 +1,6 @@
+#import de bibliotecas utilizadas 
+#inquirer para receber opções e os para acessar funções do terminal
+#pip install inquirer
 import inquirer, os
 
 lista_colaboradores = []
@@ -7,7 +10,7 @@ def boas_vindas():
     print(f'Bem-vindo ao Controle de Colaboradores do Luís Beck!')
     print()
 
-
+#receber o input e retornar a opção escolhida com a lib inquirer do menu principal
 def menu_principal():
     menu_escolhas = [
             inquirer.List('menu',
@@ -21,7 +24,7 @@ def menu_principal():
     resposta = inquirer.prompt(menu_escolhas)
     return resposta['menu']
 
-
+#chamar as funções escolhidas no menu principal
 def menu_execução():
     opcao = menu_principal()
 
@@ -35,9 +38,9 @@ def menu_execução():
         print('Muito obrigado!')
         quit()
 
-
+#lógica para cadastar um colaborador
 def cadastrar_colaboradores(id_colab):
-    os.system("cls")
+    # os.system("cls")
     global id_global
     id_colaborador = id_colab + 1
     nome = str(input('Digite o nome>> '))
@@ -54,7 +57,7 @@ def cadastrar_colaboradores(id_colab):
 
     menu_execução()
 
-
+#lógica para a consulta de um colaboardor
 def consultar_colaborador():
     while True:
         opcao = [
@@ -69,14 +72,14 @@ def consultar_colaborador():
         resposta = inquirer.prompt(opcao)
         
         if resposta['escolha'] == "1 - Consultar todos":
-            os.system("cls")
+            # os.system("cls")
             for colaborador in lista_colaboradores:
                 for k, v in colaborador.items():
                     print(f'{k}: {v}')
                 print('—'*20)
         
         elif resposta['escolha'] == '2 - Consultar por ID': 
-            os.system("cls")
+            # os.system("cls")
             existe = False
             id_consulta = int(input('Digite o id do colaborador>> '))
 
@@ -91,7 +94,7 @@ def consultar_colaborador():
                 print('Colaborador não encontrado!')
 
         elif resposta['escolha'] == '3 - Consultar por setor':
-            os.system("cls")
+            # os.system("cls")
             existe = False
             setor_consulta = str(input('Digite o setor do(os) colaborador(es)>> '))
 
@@ -109,9 +112,9 @@ def consultar_colaborador():
             break
     menu_execução()
 
-
+#lógica para a remoção de um colaborador
 def remover_colaborador():
-    os.system("cls")
+    # os.system("cls")
     existe = False
     id_colaborador = int(input('Digite o id do colaborador a ser removido>> '))
 

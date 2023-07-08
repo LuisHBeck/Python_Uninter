@@ -4,7 +4,7 @@ def boas_vindas():
 
 adicional = []
 
-
+#retonar o valor com base no peso
 def base_peso(peso):
     if peso < 3:
         return 40
@@ -15,7 +15,7 @@ def base_peso(peso):
     else:
         return 70
     
-
+#retornar o multiplicador com base no pelo
 def multiplicador_pelo(pelo):
     if pelo == 'c':
         return 1
@@ -24,7 +24,7 @@ def multiplicador_pelo(pelo):
     else:
         return 2
     
-
+#retronar o valor de serviço adicional
 def valor_extra(servico):
     if servico == 1:
         return 10
@@ -35,7 +35,7 @@ def valor_extra(servico):
     else:
         return 0
     
-
+#retornar o valor final do calculo extra
 def calculo_extra():
     valor_final = 0
     for valor in adicional:
@@ -43,7 +43,7 @@ def calculo_extra():
 
     return valor_final
 
-
+#garantir que e peso esteja dentro do valor aceito
 def cachorro_peso():
     peso = 0
     while 1 > peso or peso >= 50:
@@ -57,7 +57,7 @@ def cachorro_peso():
     valor_base = base_peso(peso)
     return valor_base
 
-
+#garantir que o pelo seja atendido pelo petshop
 def cachorro_pelo():
     pelo = " "
     while pelo not in 'cml':
@@ -72,7 +72,7 @@ def cachorro_pelo():
     multiplicador = multiplicador_pelo(pelo)
     return multiplicador
 
-
+#printar os serviços adicionais
 def opcoes_adicionais():
     print('''Deseja adicionar mais algum serviço?
     1 - Corte de Unhas - R$10,00
@@ -80,6 +80,7 @@ def opcoes_adicionais():
     3 - Limpeza de Orelhas - R$15,00
     0 - Não desejo mais nada''')
 
+#verifiar os inputs das opções extras
 def cachorro_extra():
     while True:
         opcoes_adicionais()
@@ -101,7 +102,7 @@ def cachorro_extra():
         extra_valor = valor_extra(extra)
         adicional.append(extra_valor)
 
-
+#realizar o calculo do serviço
 def calculo(base, multiplicador, extra):
     return base * multiplicador + extra
 
